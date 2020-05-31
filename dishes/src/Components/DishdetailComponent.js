@@ -12,17 +12,19 @@ class Dishdetail extends Component{
         }
         const Comments = comments.map(comment => {
             return (
+                <div className="container">
                 <li key={comment.id}>
                     <p>{comment.comment}</p>
                     <p>-- {comment.author},
                     &nbsp;
                     {new Intl.DateTimeFormat('en-US', {
                             year: 'numeric',
-                            month: 'long',
+                            month: 'short',
                             day: '2-digit'
                         }).format(new Date(comment.date))}
                     </p>
                 </li>
+                </div>
             )
         })
         return(
@@ -38,6 +40,7 @@ class Dishdetail extends Component{
     {
         if(dish!=null){
             return(
+                <div className="row">
                 <Card>
                    <CardImg width="100%" src={ dish.image } alt={dish.name}></CardImg> 
                    <CardBody>
@@ -45,6 +48,7 @@ class Dishdetail extends Component{
                        <CardText> { dish.description } </CardText>
                    </CardBody>
                 </Card>
+                </div>
             )
         }
         else{
