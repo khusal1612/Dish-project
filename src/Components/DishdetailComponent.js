@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
-
+import { Card, CardImg, CardBody, CardText, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Dishdetail extends Component{
 
-    renderComments(comments)
+    function RenderComments({comments})
     {
         if(comments==null)
         {
@@ -12,7 +12,6 @@ class Dishdetail extends Component{
         }
         const Comments = comments.map(comment => {
             return (
-                <div className="container">
                 <li key={comment.id}>
                     <p>{comment.comment}</p>
                     <p>-- {comment.author},
@@ -24,7 +23,6 @@ class Dishdetail extends Component{
                         }).format(new Date(comment.date))}
                     </p>
                 </li>
-                </div>
             )
         })
         return(
@@ -36,13 +34,13 @@ class Dishdetail extends Component{
             </div>
         )
     }
-    renderDish(dish)
+    function RenderDish({dish})
     {
         if(dish!=null){
             return(
                 <div className="row">
                 <Card>
-                   <CardImg width="100%" src={ dish.image } alt={dish.name}></CardImg> 
+                   <CardImg top src={ dish.image } alt={dish.name}></CardImg> 
                    <CardBody>
                        <CardTitle>{ dish.name }</CardTitle>
                        <CardText> { dish.description } </CardText>
@@ -64,8 +62,9 @@ class Dishdetail extends Component{
         if (dish == null) {
             return (<div></div>)
         }
-        const dishitem = this.renderDish(dish)
-        const commentitem = this.renderComments(dish.comments)
+        const Dishdetail = (props) => {
+            
+        }
         return(
             <div className="row">
                 {dishitem}
