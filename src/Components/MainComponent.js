@@ -5,6 +5,7 @@ import Dishdetail from './DishdetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
+import About from './AboutusComponent';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
 import { COMMENTS } from '../shared/comments';
@@ -36,7 +37,7 @@ class Main extends Component{
     const DishwithId = ({match}) => {
       return(
         <Dishdetail dish={this.state.dishes.filter((dish)=> dish.id === parseInt(match.params.dishId,10)[0])}
-          comments={this.state.comments.filter((comment)=> comment.dishId === parseInt(match.params.dishId,10)[0])}
+          comments={this.state.comments.filter((comment)=> comment.dishId === parseInt(match.params.dishId,10))}
         />
       );
     }
@@ -45,6 +46,7 @@ class Main extends Component{
       <Header />
       <Switch>
         <Route path="/home" component={ Homepage } />
+        <Route exact path="/aboutus" component={()=><About leaders={this.state.leaders}/>}/>
         <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
         <Route path="/menu/:dishId" component={ DishwithId } />
         <Route exact path="/contactus" component={ Contact } />        

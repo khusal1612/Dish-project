@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
-function Contact(props) {
+class Contact extends Component{
+    constructor(props){
+        super(props);
+        this.state ={
+            firstname: "",
+            lastname: "",
+            telnum: "",
+            email: "",
+            agree: false,
+            contactType: "Tel.",
+            message: ""
+        }
+    }
+    render() {
     return(
         <div className="container">
+         <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+                </Breadcrumb>
+            </div>
+            <div className="col-12">
+                <h3>Contact Us</h3>
+                <hr />
+            </div>
             <div className="row row-content">
                 <div className="col-12">
                 <h3>Location Information</h3>
@@ -29,8 +54,56 @@ function Contact(props) {
                     </div>
                 </div>
             </div>
+            <div className="row row-content">
+                <div className="col-12">
+                    <h3>Send Us Your Feedback</h3>
+                </div>
+                <div className="col-12 col-md-9">
+                    <Form>
+                        <FormGroup row>
+                            <Label htmlfor="firstname" md={2}>First Name</Label>
+                            <Col md={10}>
+                                <Input type="text" id="firstname" name="firstname" placeholder="First Name" value={this.state.firstname} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label htmlfor="lastname" md={2}>Last Name</Label>
+                            <Col md={10}>
+                                <Input type="text" id="lastname" name="lastname" placeholder="Last Name" value={this.state.lastname} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label htmlfor="telnum" md={2}>Tel. Number</Label>
+                            <Col md={10}>
+                                <Input type="tel" id="telnum" name="telnum" placeholder="Tel. Number" value={this.state.telnum} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label htmlfor="email" md={2}>Email</Label>
+                            <Col md={10}>
+                                <Input type="email" id="email" name="email" placeholder="Email" value={this.state.email} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Col md={{size: 6, offset: 2}}>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" name="agree"
+                                            checked={this.state.agree} />{' '}
+                                            <strong>May We Conatact You? </strong>
+                                    </Label>
+                                </FormGroup>
+                            </Col>
+                            <Col md={{size: 6, offset: 2}}>
+                                
+                            </Col>
+                        </FormGroup>    
+                    </Form>
+                </div>
+            </div>
         </div>
     );
+}
 }
 
 export default Contact;
