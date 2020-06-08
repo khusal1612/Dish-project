@@ -34,7 +34,6 @@ function RenderComments({comments})
 	}
 	function RenderDish({dish})
 	{
-		if(dish!=null){
 			return(
 				<div className="col-12 col-md-5 m-1">
 				<Card>
@@ -47,12 +46,6 @@ function RenderComments({comments})
 				</div>
 			)
 		}
-		else{
-			return(
-				<div></div>
-			)
-		}
-	}
 
 const Dishdetail = (props) => {
 		if(props.dish!=null)
