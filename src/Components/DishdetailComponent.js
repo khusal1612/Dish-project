@@ -3,7 +3,6 @@ import { Card, CardImg, CardBody, Col, CardText, Row, CardTitle, Breadcrumb, Bre
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
-const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && (val.length >= len);
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 
@@ -23,8 +22,8 @@ class CommentForm extends Component{
 		})
 	}
 	handleSubmit(values){
-		console.log("Current State is: " + JSON.stringify(values));
-		alert("Current State is: "+JSON.stringify(values));
+		this.toggleModal();
+		this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
 	}
 
 
@@ -58,7 +57,7 @@ class CommentForm extends Component{
 										name="yourname"
 										placeholder="Your Name"
 										validators={{
-											required, minLength: minLength(5), maxLength: maxLength(15)
+											minLength: minLength(5), maxLength: maxLength(15)
 										}}
 									/>
 									<Errors 
@@ -99,7 +98,7 @@ class CommentForm extends Component{
 		)
 	}
 }
-function RenderComments({comments})
+function RenderComments({comments, addComment, dishId})
 	{
 		if(comments==null)
 		{
@@ -125,8 +124,8 @@ function RenderComments({comments})
 				<h4>Comments</h4>
 				<ul className="list-unstyled">
 					{Comments}
-					<CommentForm />
 				</ul>
+				<CommentForm dishId={dishId} addComment={addComment}/>
 			</div>
 		)
 	}
@@ -161,7 +160,10 @@ const Dishdetail = (props) => {
 				</div>
 					<div className="row">
 						<RenderDish dish={props.dish} />
-						<RenderComments comments={props.comments} />
+						<RenderComments comments={props.comments}
+							addComment={props.addComment}
+							dishId={props.dish.id}
+							/>
 					</div>
 				</div>
 			);
